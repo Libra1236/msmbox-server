@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource dir="file:///android_asset/kr-script/toolkit/" /> 
+<items>
+   <group>
+    <page html="https://bbs.msmbox.cc/%E9%A6%96%E9%A1%B5/MSM/">
+        <title>公告</title>
+        <summary sh="update.sh" />
+    </page>
+</group>
+
+   <group title="" locked="$LOCKED">
+       <action>
+            <title>弹出授权提示</title>
+            <desc></desc>
+            <set>echo su> /data/data/com.msmbox/files/kr-script/toolkit/suu       
+            chmod 777 /data/data/com.msmbox/files/kr-script/toolkit/suu
+            echo 请重启APP
+            pkill com.msmbox
+            su</set>
+        </action>
+    
+   <action>
+            <title>自定义授权命令</title>
+            <param name="test" label="请输入...." title="输入" placeholder="如果你是suu，就输suu命令" type="text" />
+            <set>
+            echo $test "$@"> /data/data/com.msmbox/files/kr-script/toolkit/$test
+            chmod 777 /data/data/com.msmbox/files/kr-script/toolkit/suu
+            echo 请重启APP
+            pkill com.msmbox
+            $test</set>
+        </action>
+        
+           <action>
+            <title>使用漏洞提权</title>
+            <desc>看你的旧手机运气</desc>
+            <set>mv /data/data/com.msmbox/files/kr-script/toolkit/mtk-su /data/data/com.msmbox/files/kr-script/toolkit/suu
+            echo 重启APP</set>
+        </action>
+    
+   </group>
+   
+    <group title="个性化手机">
+        <page config="samples/adb.xml" title="OTG刷机功能" />
+            <!--action-->
+            <action shell="hidden">
+            <title>全局调度</title>
+            <desc>建议使用xp和Magisk，不会给你提示成功</desc>
+             <summary sh="sh /data/yc.sh" />
+            <param name="test"> value="X">
+                <option value="auto">动态</option>
+                <option value="powersave">省电</option>
+                <option value="balance">均衡</option>
+                <option value="performance">性能</option>
+                <option value="fast">极速</option>
+            </param>
+            <set>sh /data/powercfg.sh $test
+            echo echo 当前工作模式:$test >/data/yc.sh</set>
+        </action>
+
+        <page config="samples/switch.xml" title="功能菜单" />      
+        <page config="samples/system.xml" title="修改系统文件" />        
+        <!--page locked="true "config="samples/termux.xml" title="Termux功能/Minecraft服务器" /-->        
+        <page config="samples/picker2.xml" title="Magisk管理" />
+        <page config="samples/page.xml" title="LSP管理" />
+        <!--page config="samples/switch.xml" title="调整CPU/GPU" /-->
+        <page config="samples/fuck_update.xml" title="禁用手机更新" />
+    </group>
+    
+        <group title="刷机工厂">
+        <page config="samples/img.xml" title="自做一个镜像/分区管理" />
+        <!--page locked="true" config="samples/fuck_update.xml" title="制作ROM" /-->
+    </group>
+    
+        <group title="数据备份">
+           <action>
+            <title>应用数据备份</title>
+            <param name="package_name" type="app" />
+            <set>tar -cf /sdcard/MSMBOX/$package_name.zxc /data/data/$package_name</set>
+            <get>tar -cf /sdcard/MSMBOX/$package_name.sdcardzxc /sdcard/Android/data/$package_name</get>
+        </action>
+        
+    <action>
+        <title>应用数据恢复</title>
+        <desc></desc>
+        <set>
+        tar -xf "${sdcardzxc:="$sdcardzxc2"}" /
+        tar -xf "${zxc:="$zxc2"}" /
+        </set>
+        <params>
+            <param name="sdcardzxc" type="file" suffix="sdcardzxc" editable="true" required="true" title="" desc="此处选择sdcardzxc文件" />
+        </params>
+        <params>
+            <param name="zxc" type="file" suffix="zxc" editable="true" required="true" title="" desc="此处选择zxc文件" />
+        </params>
+    </action>
+    
+    </group>
+    
+        <!--group title="把main.xml放入/sdcard/MSMBOX/plugin/">
+        <page config="/sdcard/MSMBOX/plugin/main.xml" title="启动外置脚本" />
+    </group-->
+    
+        <group title="">
+          <page config="samples/dsu.xml" title="DSU镜像测试" />
+        </group>
+        
+        
+        <!--group title="">
+        <page config="samples/termux1.xml" title="termux专区" />
+    </group-->
+   
+   
+    <group title="系统调试（仅限高级玩家）">
+        <resource dir="file:///android_asset/samples/thermal" />
+        <resource dir="file:///android_asset/samples/kt" />
+
+        <!--page
+            before-load="samples/thermal/page-before-load.sh"
+            config-sh="samples/thermal/page-xml.sh"
+            desc="MIUI专用"
+            title="MIUI温控查看" /-->
+
+        <page config="samples/kt/kernel_tuner.xml" title="内核调谐器" />
+
+    </group>
+    
+        <group title="插件功能">
+    <page config-sh="file:///android_asset/samples/pingle.sh" title="插件功能" desc="使用第三方插件/脚本，文件格式zip2(7z)">
+    <option type="file" style="fab" suffix="zip2" auto-off="true" reload="true"/>
+    <handler>
+        mkdir -p $START_DIR/module
+        7z x -y $file -o$START_DIR/module
+        chmod -R 755 $START_DIR/module/
+    </handler>
+    </page>
+</group>
+    <!--group title="文字节点">
+        <page config="samples/text.xml" title="Text（文字节点）" />
+    </group>
+
+    <group title="其它">
+        <page config="samples/shortcut.xml" title="快捷方式&amp;图标" desc="配置功能节点可配置为快捷方式，并设置图标" />
+        <page config="samples/reload.xml" title="reload 属性" desc="配置节点显示内容关联刷新" />
+        <page config="samples/bg_task/bg_task.xml" title="后台任务" />
+        <page config="samples/new.xml" title="新功能测试" />
+    </group>
+
+    <group title="Web引擎">
+        <page config="samples/web.xml" title="网页引擎测试" />
+    </group-->
+
+</items>
