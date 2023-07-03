@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<page>
+        <group title="">        
+        <page html="https://github.com/phhusson/treble_experimentations/wiki/Generic-System-Image-(GSI)-list" title="GSI仓库"/>
+        <page config="samples/vivo_boot.xml" title="vivo boot仓库" />
+        <!--page config="samples/page.xml" title="ROM仓库" /-->
+        <page html="https://github.com/tiann/KernelSU/releases" title="kernelsu仓库" />
+        <page html="http://bbs.msmbox.cc" title="MSM玩机下载站" />
+        <page html="https://pd.qq.com/s/103tlnceq" title="应用商店" />
+        <page html="https://pd.qq.com/s/103tlnceq" title="加入频道" />
+        <!--group title="交流">
+        <page html="file:///android_asset/web/10.html" title="圈子" />
+        <page html="file:///android_asset/web/1.html" title="MSMBOX讨论" />
+        <page html="file:///android_asset/web/4.html" title="刷机" />
+        <page html="file:///android_asset/web/5.html" title="TWRP" />
+        <page html="file:///android_asset/web/6.html" title="数码广场" />
+        <page html="file:///android_asset/web/7.html" title="电脑城" />
+        <page html="file:///android_asset/web/8.html" title="android开发" />
+        <page html="file:///android_asset/web/2.html" title="GSI/SGSI" />
+        <page html="file:///android_asset/web/3.html" title="Minecraft" />
+        <page html="file:///android_asset/web/9.html" title="用户管理" />
+        <page html="file:///android_asset/web/13.html" title="签到" />
+    </group-->
+    </group>
+</page>
